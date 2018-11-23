@@ -7,6 +7,7 @@
     <PackageProjectUrl>https://github.com/hovhanneskarapetyan/EF.Core.GenericProjection</PackageProjectUrl>
     <RepositoryUrl>https://github.com/hovhanneskarapetyan/EF.Core.GenericProjection</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
 </Project>

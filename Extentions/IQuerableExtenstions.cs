@@ -12,5 +12,11 @@ namespace EF.Core.GenericProjection.Extentions
             var lambda = ExpressionGenerator.BuildLambda<TIn, TOut>(exps);
             return query.Select(lambda);
         }
+
+        public static IQueryable<TIn> Select<TIn>(this IQueryable<TIn> query, ICollection<Expression<Func<TIn, object>>> exps)
+        {
+            var lambda = ExpressionGenerator.BuildLambda<TIn, TIn>(exps);
+            return query.Select(lambda);
+        }
     }
 }
