@@ -22,37 +22,46 @@ namespace EF.Core.GenericProjection.Models
                 Children = new List<PropertyMapInfoNode>(),
             };
 
-            var tempRoot = infoNodes[0];
+            
             root.Children.Add(infoNodes[0]);
+
 
 
 
             foreach (var node in infoNodes.Skip(1))
             {
-                if (tempRoot.Path != node.Path)
-                    root.Children.Add(node);
-                else
+                var nodeToAdd = node;
+                PropertyMapInfoNode whereToAdd = root.Children.SingleOrDefault(x => x.Path == node.Path);
+
+                if (whereToAdd == null)
                 {
-                    var location = tempRoot;
-                    var tempNode = node.Children[0];
+                    root.Children.Add(nodeToAdd);
+                    continue;
+                }
+                
+                
+                while (nodeToAdd.Path == whereToAdd.Path)
+                {
+                    if (nodeToAdd.Children.Count == 0)
+                        break;
 
-                    while (tempNode != null)
+                    nodeToAdd = nodeToAdd.Children[0];
+
+                    var tempLocation = whereToAdd.Children.SingleOrDefault(x => x.Path == nodeToAdd.Path);
+
+                    if (tempLocation == null)
                     {
-
-
-                        if (location.Children.All(x => x.Path != tempNode.Path))
-                        {
-                            tempRoot.Children.AddRange(node.Children);
-                            break;
-                        }
-                        else
-                        {
-                            var child = location.Children.Single(x => x.Path == tempNode.Path);
-
-                            location = child;
-                            tempNode = tempNode.Children.Count == 0 ? null : tempNode.Children[0];
-                        }
+                        whereToAdd.Children.Add(nodeToAdd);
+                        break;
                     }
+
+                    whereToAdd = tempLocation;
+
+                    if (nodeToAdd.Children.Count == 0)
+                        break;
+
+                    nodeToAdd = nodeToAdd.Children[0];
+
                 }
             }
 

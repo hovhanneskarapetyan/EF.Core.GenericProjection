@@ -2,6 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <Authors>Hovhannes Karapetyan</Authors>
+    <Company>Aardonyx LLC</Company>
+    <PackageProjectUrl>https://github.com/hovhanneskarapetyan/EF.Core.GenericProjection</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/hovhanneskarapetyan/EF.Core.GenericProjection</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
 </Project>
